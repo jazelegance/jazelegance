@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#1a1209" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Jaz Elegance | جاز إيليغانس</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8cc7a;
+      --gold-dark: #aa862c;
+      --black: #0d0d0d;
+      --dark-gray: #1a1a1a;
+      --cream: #f4ebd0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    body {
+      background-color: var(--black);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    header {
+      background: rgba(13, 13, 13, 0.95);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0; width: 100%; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      display: flex; gap: 1.5rem; align-items: center;
+    }
+
+    .btn-auth {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-auth:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .cart-btn {
+      background: transparent; border: none; color: var(--cream);
+      font-size: 1.5rem; cursor: pointer; position: relative;
+    }
+
+    .cart-badge {
+      position: absolute; top: -5px; right: -10px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: var(--black); font-size: 0.75rem; font-weight: bold;
+      padding: 2px 6px; border-radius: 50%;
+    }
+
+    .categories-container {
+      margin-top: 6rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-tabs {
+      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .tab-btn {
+      background: var(--dark-gray);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      color: var(--cream);
+      padding: 0.7rem 1.8rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: var(--black);
+      border-color: var(--gold);
+      box-shadow: 0 4px 15px rgba(138, 107, 32, 0.3);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      padding: 0 max(2rem, 5vw) 5rem;
+    }
+
+    .product-card {
+      background: var(--dark-gray);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.4s ease, border-color 0.4s ease;
+      display: flex; flex-direction: column; position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(201, 168, 76, 0.3);
+    }
+
+    .product-image {
+      width: 100%; height: 320px; background: #222;
+      display: flex; align-items: center; justify-content: center;
+      color: #555; overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+
+    .product-info {
+      padding: 1.5rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between;
+    }
+
+    .product-title {
+      font-size: 1.15rem; color: var(--cream); margin-bottom: 0.5rem;
+    }
+
+    .price {
+      color: var(--gold-light); font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;
+    }
+
+    .product-action-btn {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: var(--black); border: none; padding: 0.8rem; border-radius: 4px;
+      font-weight: 700; cursor: pointer; width: 100%; transition: all 0.3s ease;
+    }
+
+    .admin-controls {
+      display: none; background: rgba(0,0,0,0.4); padding: 0.8rem;
+      border-top: 1px solid rgba(201, 168, 76, 0.2); margin-top: 0.5rem;
+    }
+
+    .btn-admin-action {
+      background: transparent; border: 1px dashed var(--gold); color: var(--gold);
+      padding: 0.4rem; width: 100%; margin-bottom: 0.4rem; border-radius: 4px;
+      cursor: pointer; font-size: 0.85rem; font-weight: bold;
+    }
+    .btn-admin-action:hover { background: rgba(201, 168, 76, 0.1); }
+
+    .modal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+      display: flex; align-items: center; justify-content: center; z-index: 2000;
+    }
+
+    .modal-content {
+      background: #111; border: 1px solid var(--gold); padding: 2.5rem;
+      border-radius: 8px; width: 90%; max-width: 400px; position: relative;
+      box-shadow: 0 10px 30px rgba(138, 107, 32, 0.2);
+    }
+
+    .close-btn {
+      position: absolute; top: 15px; right: 20px; color: var(--cream);
+      font-size: 24px; cursor: pointer;
+    }
+
+    .form-group { margin-bottom: 1.5rem; text-align: right; }
+    .form-group label { display: block; color: var(--gold); margin-bottom: 0.5rem; }
+    .form-group input {
+      width: 100%; padding: 0.8rem; background: #222;
+      border: 1px solid rgba(201, 168, 76, 0.3); color: var(--cream);
+      border-radius: 4px; outline: none; text-align: right;
+    }
+
+    .btn-submit {
+      background: var(--gold); color: var(--black); border: none;
+      padding: 0.8rem; width: 100%; font-weight: 700; border-radius: 4px; cursor: pointer;
+    }
+
+    .empty-notice {
+      grid-column: 1 / -1; text-align: center; padding: 3rem;
+      color: #666; font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">JAZ ELEGANCE</div>
+    <div class="nav-actions">
+      <button id="loginBtn" onclick="openLoginModal()" class="btn-auth">تسجيل الدخول</button>
+      <span id="welcomeMsg" style="display: none; color: var(--gold-light); font-weight: bold; margin-left: 1rem;"></span>
+      <button onclick="logout()" id="logoutBtn" class="btn-auth" style="display: none; border-color: #ff4a4a; color: #ff4a4a;">خروج</button>
+      <button class="cart-btn">🛍 <span class="cart-badge" id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="categories-container">
+      <h2 class="section-title">مجموعتنا الفاخرة</h2>
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterCategory('all', this)">كل المنتجات</button>
+        <button class="tab-btn" onclick="filterCategory('men', this)">المنتجات الرجالية</button>
+        <button class="tab-btn" onclick="filterCategory('women', this)">المنتجات النسائية</button>
+        <button class="tab-btn" onclick="filterCategory('accessories', this)">إكسسوارات</button>
+      </div>
+    </section>
+
+    <section class="products-grid" id="productsGrid"></section>
+  </main>
+
+  <div id="loginModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeLoginModal()">&times;</span>
+      <h3 style="color: var(--gold); margin-bottom: 1.5rem; text-align: center;">تسجيل الدخول للمتجر</h3>
+      <form onsubmit="handleAuth(event)">
+        <div class="form-group">
+          <label>اسم المستخدم:</label>
+          <input type="text" id="username" required placeholder="أدخل admin1 أو customer1">
+        </div>
+        <div class="form-group">
+          <label>كلمة المرور:</label>
+          <input type="password" id="password" required placeholder="أدخل كلمة المرور">
+        </div>
+        <button type="submit" class="btn-submit">دخول</button>
+        <p id="loginError" style="color: #ff4a4a; display: none; margin-top: 10px; text-align: center;"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let products = [
+      { id: 1, name: "حقيبة ديور الفاخرة الوردية", price: 1200, category: "women", image: "dior_pink.png" },
+      { id: 2, name: "حقيبة لويس فيتون الكلاسيكية الأزرق والبيج", price: 1500, category: "women", image: "lv_bag.png" },
+      { id: 3, name: "محفظة وحقيبة كتف إيف سان لوران حمراء", price: 950, category: "women", image: "ysl_red.png" },
+      { id: 4, name: "حقيبة غويا الكلاسيكية الفاخرة", price: 1800, category: "women", image: "goyard.png" }
+    ];
+
+    const mockUsers = {
+      "admin1": { password: "admin123", role: "admin", name: "إدارة جاز" },
+      "customer1": { password: "user123", role: "customer", name: "كرم" }
+    };
+
+    let currentUser = null;
+    let currentCategory = 'all';
+    let cartCount = 0;
+
+    window.onload = function() { renderProducts(); };
+
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      const filtered = products.filter(p => currentCategory === 'all' || p.category === currentCategory);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty-notice">لا توجد منتجات متوفرة حالياً في هذا القسم.</div>`;
+        return;
+      }
+
+      filtered.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        const adminDisplay = (currentUser && currentUser.role === 'admin') ? 'block' : 'none';
+        const clientDisplay = (currentUser && currentUser.role === 'admin') ? 'none' : 'block';
+
+        card.innerHTML = `
+          <div class="product-image">
+            ${product.image ? `<img src="${product.image}" alt="${product.name}">` : '✨'}
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="price">${product.price} ر.س</p>
+            <button class="product-action-btn" style="display: ${clientDisplay}" onclick="addToCart()">🛍 أضف للسلة</button>
+            <div class="admin-controls" style="display: ${adminDisplay}">
+              <button class="btn-admin-action" onclick="editName(${product.id})">✏️ تعديل الاسم</button>
+              <button class="btn-admin-action" onclick="editPrice(${product.id})">💰 تعديل السعر</button>
+              <button class="btn-admin-action" style="border-color:#ff4a4a; color:#ff4a4a;" onclick="deleteProduct(${product.id})">❌ حذف المنتج</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterCategory(category, element) {
+      currentCategory = category;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      element.classList.add('active');
+      renderProducts();
+    }
+
+    function openLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
+    function closeLoginModal() { document.getElementById('loginModal').style.display = 'none'; }
+
+    function handleAuth(event) {
+      event.preventDefault();
+      const userInp = document.getElementById('username').value;
+      const passInp = document.getElementById('password').value;
+      const errorMsg = document.getElementById('loginError');
+
+      if (mockUsers[userInp] && mockUsers[userInp].password === passInp) {
+        currentUser = mockUsers[userInp];
+        errorMsg.style.display = 'none';
+        closeLoginModal();
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('welcomeMsg').textContent = `مرحباً، ${currentUser.name}`;
+        document.getElementById('welcomeMsg').style.display = 'inline-block';
+        document.getElementById('logoutBtn').style.display = 'inline-block';
+        renderProducts();
+      } else {
+        errorMsg.textContent = "اسم المستخدم أو كلمة المرور غير صحيحة!";
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    function logout() {
+      currentUser = null;
+      document.getElementById('loginBtn').style.display = 'inline-block';
+      document.getElementById('welcomeMsg').style.display = 'none';
+      document.getElementById('logoutBtn').style.display = 'none';
+      renderProducts();
+    }
+
+    function addToCart() {
+      cartCount++;
+      document.getElementById('cartCount').textContent = cartCount;
+    }
+
+    function editPrice(id) {
+      const product = products.find(p => p.id === id);
+      if(!product) return;
+      const newPrice = prompt(`أدخل السعر الجديد لـ (${product.name}):`, product.price);
+      if(newPrice && !isNaN(newPrice)) { product.price = parseFloat(newPrice); renderProducts(); }
+    }
+
+    function editName(id) {
+      const product = products.find(p => p.id === id);
+      if(!product) return;
+      const newName = prompt(`أدخل الاسم الجديد:`, product.name);
+      if(newName && newName.trim() !== "") { product.name = newName.trim(); renderProducts(); }
+    }
+
+    function deleteProduct(id) {
+      if(confirm("هل تريد حذف هذا المنتج؟")) { products = products.filter(p => p.id !== id); renderProducts(); }
+    }
+  </script>
+</body>
+</html>
